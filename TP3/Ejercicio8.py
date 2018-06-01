@@ -4,7 +4,7 @@ import json
 
 conn = pymysql.connect(host='localhost',port=3306,user="root",passwd="MySQL",db="grupo12")
 cur = conn.cursor()
-cur.execute("""select p.dni, p.nombre, pp.fecha, pp.peso from persona p inner join personaPeso pp on p.dni=pp.dni where p.dni=1""")
+cur.execute('select p.dni, p.nombre, pp.fecha, pp.peso from persona p inner join personaPeso pp on p.dni=pp.dni')
 rows=[]
 for row in cur:
     d={}
