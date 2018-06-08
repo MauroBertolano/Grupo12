@@ -1,0 +1,41 @@
+from tkinter import *
+
+def sumar():
+    n1 = int(var1.get())
+    n2 = int(var2.get())
+    print(n1+n2)
+def restar():
+    n1 = int(var1.get())
+    n2 = int(var2.get())
+    print(n1-n2)
+def multipl():
+    n1 = int(var1.get())
+    n2 = int(var2.get())
+    print(n1*n2)
+def divid():
+    n1 = int(var1.get())
+    n2 = int(var2.get())
+    print(n1/n2)
+raiz = Tk()
+etiq1 = Label(raiz, text = "Primer Operando" )
+etiq2= Label(raiz, text = "Segundo Operando" )
+etiq1.grid(column=2,row=2)
+etiq2.grid(column=3,row=2)
+v1 = IntVar()
+v1.set("")
+v2 = IntVar()
+v2.set("")
+var1=Entry(raiz, textvariable = v1)
+var2=Entry(raiz, textvariable = v2)
+var1.grid(column=2,row=3)
+var2.grid(column=3,row=3)
+mas=Button(text = "+", command = sumar)
+menos=Button(text = "-", command = restar)
+multiplicar=Button(text = "*", command = multipl)
+dividir=Button(text = "/", command = divid)
+mas.grid(column=4,row=3)
+menos.grid(column=5,row=3)
+multiplicar.grid(column=6,row=3)
+dividir.grid(column=7,row=3)
+
+raiz.mainloop()
