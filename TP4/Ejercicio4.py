@@ -1,32 +1,62 @@
 from tkinter import *
 from tkinter.ttk import Treeview
 
-def aceptar(event,a,b):
+lista={'Rosario':'2000','Perez':'1111','Funes':'2222','Roldan':'3333','Pueblo Esther':'4444'}
+def aceptar(a, b, t):
     c = tv.insert("",END,text = a)
     tv.insert(c,END,text = b)
-def alta(event):
+    t.destroy()
+def aceptar(a, b, t,z):
+    c = tv.insert("",END,text = a)
+    tv.insert(c,END,text = b)
+    tv.delete(z)
+    t.destroy()
+def alta():
     raiz2 = Tk()
     lbl1=Label(raiz2,text = "Nombre de ciudad")
     lbl2=Label(raiz2,text = "Codigo postal")
-    ciud = StringVar
-    post = StringVar
+    ciud = StringVar()
+    post = StringVar()
     txtCiudad = Entry(raiz2, textvariable = ciud)
     txtCodigo = Entry(raiz2, textvariable = post)
     lbl1.grid(column = 1,row=1)
     lbl2.grid(column = 1,row=2)
     txtCiudad.grid(column = 2,row=1)
     txtCodigo.grid(column = 2,row=2)
-    btnAceptar = Button(raiz2,text = "Aceptar")
-    btnCancelar= Button(raiz2,text = "Cancelar")
+    btnAceptar = Button(raiz2,text = "Aceptar", command = lambda : aceptar(txtCiudad.get(),txtCodigo.get(),raiz2))
+    btnCancelar= Button(raiz2,text = "Cancelar", command = lambda : raiz2.destroy())
     btnAceptar.grid(column = 1,row=3)
     btnCancelar.grid(column = 2,row=3)
-    btnAceptar.bind('<Button-1>',aceptar(ciud,post))
     raiz2.mainloop()
-
+def baja(a):
+    try:
+        tv.delete(a)
+    except Exception:
+        print("Seleccione un elemento")
+def modificar(v):
+    raiz2 = Tk()
+    lbl1=Label(raiz2,text = "Nombre de ciudad")
+    lbl2=Label(raiz2,text = "Codigo postal")
+    ciud = StringVar()
+    post = StringVar()
+    txtCiudad = Entry(raiz2, textvariable = ciud)
+    txtCodigo = Entry(raiz2, textvariable = post)
+    lbl1.grid(column = 1,row=1)
+    lbl2.grid(column = 1,row=2)
+    txtCiudad.grid(column = 2,row=1)
+    txtCodigo.grid(column = 2,row=2)
+    btnAceptar = Button(raiz2,text = "Aceptar", command = lambda : aceptar(txtCiudad.get(),txtCodigo.get(),raiz2,v))
+    btnCancelar= Button(raiz2,text = "Cancelar", command = lambda : raiz2.destroy())
+    btnAceptar.grid(column = 1,row=3)
+    btnCancelar.grid(column = 2,row=3)
+    raiz2.mainloop()
 raiz = Tk()
 tv = Treeview(raiz)
 tv.pack()
-ciudad1 = tv.insert("",1,text="Rosario")
+for ciu,cod in lista.items():
+    h = tv.insert("",END,text=ciu)
+    tv.insert(h,END,text=cod)
+'''ciudad1 = tv.insert("",1,text="Rosario")
 codpos1 = tv.insert(ciudad1,1,text="2000")
 ciudad2 = tv.insert("",5,text="Perez")
 codpos2 = tv.insert(ciudad2,1,text="1111")
@@ -35,15 +65,12 @@ codpos3 = tv.insert(ciudad3,1,text="3333")
 ciudad4 = tv.insert("",4,text="Roldan")
 codpos4 = tv.insert(ciudad4,1,text="8888")
 ciudad5 = tv.insert("",2,text="Pueblo Esther")
-codpos5 = tv.insert(ciudad5,1,text="9999")
-altaBtn = Button(raiz, text = "Alta")
-bajaBtn = Button(raiz, text = "Baja")
-modificarBtn = Button(raiz, text = "Modificar")
-altaBtn.bind('<Button-1>',alta)
+codpos5 = tv.insert(ciudad5,1,text="9999")'''
+altaBtn = Button(raiz, text = "Alta", command = lambda : alta())
+bajaBtn = Button(raiz, text = "Baja", command = lambda : baja(tv.focus()))
+modificarBtn = Button(raiz, text = "Modificar", command = lambda : modificar(tv.focus()))
 altaBtn.pack()
 bajaBtn.pack()
 modificarBtn.pack()
 raiz.mainloop()
-
-
 
